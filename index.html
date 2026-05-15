@@ -30,11 +30,6 @@
     <link rel="icon" type="image/png" sizes="32x32" href="Resources/infraclean-app-icon-light.png"
         media="(prefers-color-scheme: dark)">
     <!-- <link rel="icon" type="image/png" sizes="32x32" href="Resources/infraclean-app-icon-light.png"> -->
-    <style> 
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 1;
-        }
-    </style>
     <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -110,94 +105,6 @@
 
         .animate-marker-pulse {
             animation: marker-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        }
-
-        .mobile-menu {
-            max-height: 0;
-            opacity: 0;
-            overflow: hidden;
-            transform: translateY(-8px);
-            transition: max-height 380ms cubic-bezier(0.22, 1, 0.36, 1),
-                opacity 280ms ease,
-                transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
-        }
-
-        .mobile-menu.is-open {
-            max-height: 460px;
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .mobile-menu-item {
-            opacity: 0;
-            transform: translateY(-6px);
-            transition: opacity 240ms ease, transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
-        }
-
-        .mobile-menu.is-open .mobile-menu-item {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .mobile-menu.is-open .mobile-menu-item:nth-child(1) {
-            transition-delay: 40ms;
-        }
-
-        .mobile-menu.is-open .mobile-menu-item:nth-child(2) {
-            transition-delay: 80ms;
-        }
-
-        .mobile-menu.is-open .mobile-menu-item:nth-child(3) {
-            transition-delay: 120ms;
-        }
-
-        .mobile-menu.is-open .mobile-menu-item:nth-child(4) {
-            transition-delay: 160ms;
-        }
-
-        .mobile-menu.is-open .mobile-menu-item:nth-child(5) {
-            transition-delay: 200ms;
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-
-            .mobile-menu,
-            .mobile-menu-item {
-                transition: none;
-            }
-        }
-
-        .policy-modal .policy-modal-panel {
-            opacity: 0;
-            transform: translateY(18px) scale(0.98);
-            transition: opacity 220ms ease, transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
-        }
-
-        .policy-modal {
-            overflow-y: auto;
-        }
-
-        .policy-modal.is-open .policy-modal-panel {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
-
-        .tc-scroll {
-            max-height: 50vh;
-            overflow-y: auto;
-            text-align: justify;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-        }
-
-        .tc-scroll::-webkit-scrollbar {
-            display: none;
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            .policy-modal .policy-modal-panel {
-                transition: none;
-            }
         }
     </style>
 </head>

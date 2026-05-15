@@ -15,11 +15,6 @@
     <link rel="icon" type="image/png" sizes="32x32" href="Resources/infraclean-app-icon-dark.png"
         media="(prefers-color-scheme: dark)">
     <link rel="icon" type="image/png" sizes="32x32" href="Resources/infraclean-app-icon-light.png">
-    <style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 1;
-        }
-    </style>
     <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -80,25 +75,6 @@
             }
         }
     </script>
-    <style>
-        .gradient-mesh {
-            background: linear-gradient(135deg, rgba(45, 125, 237, 0.1) 0%, rgba(0, 196, 167, 0.1) 100%);
-        }
-
-        .card-hover {
-            transition: all 0.3s ease;
-        }
-
-        .card-hover:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 24px rgba(45, 125, 237, 0.15);
-        }
-
-        .bg-grid-subtle {
-            background-image: linear-gradient(rgba(45, 125, 237, 0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(45, 125, 237, 0.08) 1px, transparent 1px);
-            background-size: 40px 40px;
-        }
-    </style>
 </head>
 
 <body
@@ -183,19 +159,21 @@
                         <div
                             class="w-full h-full bg-white rounded-xl border border-brand-blue/10 p-8 md:p-10 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:border-brand-teal/40 hover:shadow-[0_14px_30px_rgba(45,125,237,0.25)]">
                             <h2 class="font-headline-lg text-[28px] mb-8 text-on-surface">Send Us a Message</h2>
-                            <form class="space-y-6">
+                            <form class="space-y-6" data-contact-form novalidate>
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div>
                                         <label
                                             class="block font-label-caps text-label-caps text-on-surface-variant mb-3">Full
                                             Name</label>
-                                        <input type="text" placeholder="Your name"
+                                        <input type="text" name="fullName" autocomplete="name" required maxlength="80"
+                                            placeholder="Your name"
                                             class="w-full px-4 py-3 border border-brand-blue/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-blue/20 focus:border-brand-blue transition-all font-body-md" />
                                     </div>
                                     <div>
                                         <label
                                             class="block font-label-caps text-label-caps text-on-surface-variant mb-3">Company</label>
-                                        <input type="text" placeholder="Your organization"
+                                        <input type="text" name="company" autocomplete="organization" maxlength="120"
+                                            placeholder="Your organization"
                                             class="w-full px-4 py-3 border border-brand-blue/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-blue/20 focus:border-brand-blue transition-all font-body-md" />
                                     </div>
                                 </div>
@@ -204,7 +182,8 @@
                                     <label
                                         class="block font-label-caps text-label-caps text-on-surface-variant mb-3">Email
                                         Address</label>
-                                    <input type="email" placeholder="your.email@company.com"
+                                    <input type="email" name="email" autocomplete="email" required maxlength="120"
+                                        placeholder="your.email@company.com"
                                         class="w-full px-4 py-3 border border-brand-blue/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-blue/20 focus:border-brand-blue transition-all font-body-md" />
                                 </div>
 
@@ -244,11 +223,20 @@
                                 <div>
                                     <label
                                         class="block font-label-caps text-label-caps text-on-surface-variant mb-3">Message</label>
-                                    <textarea rows="5" placeholder="Tell us about your project..."
+                                    <textarea rows="5" name="message" required minlength="10" maxlength="2000"
+                                        placeholder="Tell us about your project..."
                                         class="w-full px-4 py-3 border border-brand-blue/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-blue/20 focus:border-brand-blue transition-all font-body-md resize-none"></textarea>
                                 </div>
 
-                                <button type="submit"
+                                <div class="hidden" aria-hidden="true">
+                                    <label for="companyWebsite">Company Website</label>
+                                    <input id="companyWebsite" type="text" name="companyWebsite" tabindex="-1"
+                                        autocomplete="off" />
+                                </div>
+
+                                <p class="hidden text-body-sm" data-contact-status role="status" aria-live="polite"></p>
+
+                                <button type="submit" data-contact-submit
                                     class="w-full bg-brand-teal text-white font-label-caps text-label-caps px-6 py-3 rounded-lg hover:brightness-110 transition-all shadow-[0_4px_14px_rgba(0,196,167,0.3)] font-bold">
                                     SEND MESSAGE
                                 </button>
@@ -599,97 +587,6 @@
 
     <script src="common.js"></script>
 
-</body>
-
-<script>
-    // Custom Dropdown Logic
-    document.addEventListener('DOMContentLoaded', function () {
-        const dropdown = document.querySelector('.custom-dropdown');
-        if (!dropdown) return;
-        const toggle = dropdown.querySelector('.custom-dropdown-toggle');
-        const list = dropdown.querySelector('.custom-dropdown-list');
-        const options = dropdown.querySelectorAll('.custom-dropdown-option');
-        const selected = dropdown.querySelector('#serviceDropdownSelected');
-        const input = dropdown.querySelector('#serviceDropdownInput');
-
-        let open = false;
-        let focusedIdx = -1;
-
-        function openDropdown() {
-            list.classList.remove('hidden');
-            toggle.setAttribute('aria-expanded', 'true');
-            open = true;
-            // Focus first selected or first option
-            const sel = dropdown.querySelector('.custom-dropdown-option.selected');
-            focusedIdx = sel ? Array.from(options).indexOf(sel) : 0;
-            options[focusedIdx]?.classList.add('active');
-            options[focusedIdx]?.scrollIntoView({ block: 'nearest' });
-        }
-        function closeDropdown() {
-            list.classList.add('hidden');
-            toggle.setAttribute('aria-expanded', 'false');
-            open = false;
-            options.forEach(opt => opt.classList.remove('active'));
-        }
-        function selectOption(idx) {
-            options.forEach(opt => opt.classList.remove('selected'));
-            options[idx].classList.add('selected');
-            selected.textContent = options[idx].textContent;
-            input.value = options[idx].dataset.value;
-            closeDropdown();
-        }
-        toggle.addEventListener('click', function (e) {
-            e.stopPropagation();
-            open ? closeDropdown() : openDropdown();
-        });
-        options.forEach((opt, idx) => {
-            opt.addEventListener('click', function (e) {
-                selectOption(idx);
-            });
-            opt.addEventListener('mouseenter', function () {
-                options.forEach(o => o.classList.remove('active'));
-                opt.classList.add('active');
-                focusedIdx = idx;
-            });
-        });
-        document.addEventListener('click', function (e) {
-            if (!dropdown.contains(e.target)) closeDropdown();
-        });
-        toggle.addEventListener('keydown', function (e) {
-            if (!open && (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' ')) {
-                e.preventDefault();
-                openDropdown();
-                return;
-            }
-        });
-        list.addEventListener('keydown', function (e) {
-            if (!open) return;
-            if (e.key === 'ArrowDown') {
-                e.preventDefault();
-                options[focusedIdx]?.classList.remove('active');
-                focusedIdx = (focusedIdx + 1) % options.length;
-                options[focusedIdx].classList.add('active');
-                options[focusedIdx].scrollIntoView({ block: 'nearest' });
-            } else if (e.key === 'ArrowUp') {
-                e.preventDefault();
-                options[focusedIdx]?.classList.remove('active');
-                focusedIdx = (focusedIdx - 1 + options.length) % options.length;
-                options[focusedIdx].classList.add('active');
-                options[focusedIdx].scrollIntoView({ block: 'nearest' });
-            } else if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                selectOption(focusedIdx);
-            } else if (e.key === 'Escape') {
-                closeDropdown();
-                toggle.focus();
-            }
-        });
-        // Accessibility: allow tabbing out
-        list.addEventListener('focusout', function (e) {
-            if (!list.contains(e.relatedTarget)) closeDropdown();
-        });
-    });
-</script>
 </body>
 
 </html>

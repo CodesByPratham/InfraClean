@@ -111,4 +111,202 @@ document.addEventListener('DOMContentLoaded', () => {
             closeModal();
         }
     });
+
+    const dropdown = document.querySelector('.custom-dropdown');
+    if (dropdown) {
+        const toggle = dropdown.querySelector('.custom-dropdown-toggle');
+        const list = dropdown.querySelector('.custom-dropdown-list');
+        const options = dropdown.querySelectorAll('.custom-dropdown-option');
+        const selected = dropdown.querySelector('#serviceDropdownSelected');
+        const input = dropdown.querySelector('#serviceDropdownInput');
+
+        if (toggle && list && options.length && selected && input) {
+            let open = false;
+            let focusedIdx = -1;
+
+            const openDropdown = () => {
+                list.classList.remove('hidden');
+                toggle.setAttribute('aria-expanded', 'true');
+                open = true;
+
+                const selectedOption = dropdown.querySelector('.custom-dropdown-option.selected');
+                focusedIdx = selectedOption ? Array.from(options).indexOf(selectedOption) : 0;
+                options[focusedIdx]?.classList.add('active');
+                options[focusedIdx]?.scrollIntoView({ block: 'nearest' });
+            };
+
+            const closeDropdown = () => {
+                list.classList.add('hidden');
+                toggle.setAttribute('aria-expanded', 'false');
+                open = false;
+                options.forEach((option) => option.classList.remove('active'));
+            };
+
+            const selectOption = (idx) => {
+                options.forEach((option) => option.classList.remove('selected'));
+                options[idx].classList.add('selected');
+                selected.textContent = options[idx].textContent;
+                input.value = options[idx].dataset.value;
+                closeDropdown();
+            };
+
+            toggle.addEventListener('click', (event) => {
+                event.stopPropagation();
+                open ? closeDropdown() : openDropdown();
+            });
+
+            options.forEach((option, idx) => {
+                option.addEventListener('click', () => {
+                    selectOption(idx);
+                });
+
+                option.addEventListener('mouseenter', () => {
+                    options.forEach((opt) => opt.classList.remove('active'));
+                    option.classList.add('active');
+                    focusedIdx = idx;
+                });
+            });
+
+            document.addEventListener('click', (event) => {
+                if (!dropdown.contains(event.target)) {
+                    closeDropdown();
+                }
+            });
+
+            toggle.addEventListener('keydown', (event) => {
+                if (!open && (event.key === 'ArrowDown' || event.key === 'Enter' || event.key === ' ')) {
+                    event.preventDefault();
+                    openDropdown();
+                }
+            });
+
+            list.addEventListener('keydown', (event) => {
+                if (!open) {
+                    return;
+                }
+
+                if (event.key === 'ArrowDown') {
+                    event.preventDefault();
+                    options[focusedIdx]?.classList.remove('active');
+                    focusedIdx = (focusedIdx + 1) % options.length;
+                    options[focusedIdx].classList.add('active');
+                    options[focusedIdx].scrollIntoView({ block: 'nearest' });
+                } else if (event.key === 'ArrowUp') {
+                    event.preventDefault();
+                    options[focusedIdx]?.classList.remove('active');
+                    focusedIdx = (focusedIdx - 1 + options.length) % options.length;
+                    options[focusedIdx].classList.add('active');
+                    options[focusedIdx].scrollIntoView({ block: 'nearest' });
+                } else if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    selectOption(focusedIdx);
+                } else if (event.key === 'Escape') {
+                    closeDropdown();
+                    toggle.focus();
+                }
+            });
+
+            list.addEventListener('focusout', (event) => {
+                if (!list.contains(event.relatedTarget)) {
+                    closeDropdown();
+                }
+            });
+        }
+    }
+
+    const contactForm = document.querySelector('[data-contact-form]');
+    if (contactForm) {
+        const statusElement = contactForm.querySelector('[data-contact-status]');
+        const submitButton = contactForm.querySelector('[data-contact-submit]');
+        const serviceLabel = contactForm.querySelector('#serviceDropdownSelected');
+        const serviceInput = contactForm.querySelector('#serviceDropdownInput');
+
+        const setFormStatus = (message, isError) => {
+            if (!statusElement) {
+                return;
+            }
+
+            statusElement.textContent = message;
+            statusElement.classList.remove('hidden', 'text-red-600', 'text-brand-teal');
+            statusElement.classList.add(isError ? 'text-red-600' : 'text-brand-teal');
+        };
+
+        const clearFormStatus = () => {
+            if (!statusElement) {
+                return;
+            }
+
+            statusElement.textContent = '';
+            statusElement.classList.add('hidden');
+            statusElement.classList.remove('text-red-600', 'text-brand-teal');
+        };
+
+        contactForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const formData = new FormData(contactForm);
+            const payload = {
+                fullName: (formData.get('fullName') || '').toString().trim(),
+                company: (formData.get('company') || '').toString().trim(),
+                email: (formData.get('email') || '').toString().trim(),
+                service: (formData.get('service') || '').toString().trim(),
+                message: (formData.get('message') || '').toString().trim(),
+                companyWebsite: (formData.get('companyWebsite') || '').toString().trim()
+            };
+
+            if (!payload.fullName || !payload.email || !payload.message) {
+                setFormStatus('Please fill in your name, email, and message.', true);
+                return;
+            }
+
+            if (!payload.service) {
+                setFormStatus('Please select a service interest before submitting.', true);
+                return;
+            }
+
+            const originalButtonText = submitButton ? submitButton.textContent : '';
+            if (submitButton) {
+                submitButton.disabled = true;
+                submitButton.textContent = 'SENDING...';
+                submitButton.classList.add('opacity-70', 'cursor-not-allowed');
+            }
+
+            clearFormStatus();
+
+            try {
+                const response = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json().catch(() => ({}));
+
+                if (!response.ok) {
+                    throw new Error(result.error || 'Unable to submit your request right now.');
+                }
+
+                contactForm.reset();
+                if (serviceLabel) {
+                    serviceLabel.textContent = 'Select a service';
+                }
+                if (serviceInput) {
+                    serviceInput.value = '';
+                }
+
+                setFormStatus('Thanks. Your enquiry has been sent successfully.', false);
+            } catch (error) {
+                setFormStatus(error.message || 'Something went wrong while sending your enquiry.', true);
+            } finally {
+                if (submitButton) {
+                    submitButton.disabled = false;
+                    submitButton.textContent = originalButtonText;
+                    submitButton.classList.remove('opacity-70', 'cursor-not-allowed');
+                }
+            }
+        });
+    }
 });
