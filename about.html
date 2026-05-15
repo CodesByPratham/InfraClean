@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>About Us - Infra Clean Services - Aerospace Grade Maintenance</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet">
+    <link href="common.css" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="32x32" href="Resources/infraclean-app-icon-light.png"
+        media="(prefers-color-scheme: light)">
+    <link rel="icon" type="image/png" sizes="32x32" href="Resources/infraclean-app-icon-dark.png"
+        media="(prefers-color-scheme: dark)">
+    <link rel="icon" type="image/png" sizes="32x32" href="Resources/infraclean-app-icon-light.png">
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#2D7DED",
+                        "secondary": "#00C4A7",
+                        "brand-blue": "#2D7DED",
+                        "brand-teal": "#00A693",
+                        "brand-dark": "#0A1628",
+                        "brand-darker": "#111E35",
+                        "surface": "#f9f9ff",
+                        "surface-variant": "#f2f3fd",
+                        "on-surface": "#111E35",
+                        "on-surface-variant": "#56627a",
+                        "outline": "#cbd5e1",
+                        "brand-card": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-max": "1440px",
+                        "unit-8": "32px",
+                        "margin-mobile": "16px",
+                        "base": "4px",
+                        "unit-12": "48px",
+                        "unit-4": "16px",
+                        "unit-2": "8px",
+                        "unit-1": "4px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Space Grotesk"],
+                        "body-sm": ["Inter"],
+                        "headline-xl": ["Space Grotesk"],
+                        "label-caps": ["JetBrains Mono"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Space Grotesk"],
+                        "body-md": ["Inter"],
+                        "telemetry": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "headline-xl": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-caps": ["12px", { "lineHeight": "1.2", "letterSpacing": "0.1em", "fontWeight": "500" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "telemetry": ["14px", { "lineHeight": "1.0", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gradient-mesh {
+            background: linear-gradient(135deg, rgba(45, 125, 237, 0.1) 0%, rgba(0, 196, 167, 0.1) 100%);
+        }
+
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(45, 125, 237, 0.15);
+        }
+
+        .bg-grid-subtle {
+            background-image: linear-gradient(rgba(45, 125, 237, 0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(45, 125, 237, 0.08) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        .tech-gradient {
+            background: linear-gradient(135deg, rgba(45, 125, 237, 0.15) 0%, rgba(0, 166, 147, 0.15) 100%);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-surface text-on-surface font-body-md antialiased overflow-x-hidden selection:bg-brand-blue selection:text-white">
+
+    <!-- Navigation -->
+    <nav
+        class="fixed top-0 w-full z-50 transition-all duration-300 bg-white/75 backdrop-blur-md border-b border-brand-blue/10">
+        <div class="max-w-container-max mx-auto px-margin-mobile md:px-unit-12 h-20 flex justify-between items-center">
+            <a class="flex items-center gap-3 group" href="index.html"><img alt="Infra Clean Logo"
+                    class="w-auto group-hover:opacity-80 transition-opacity h-[44px]"
+                    src="Resources/InfraClean-Logo-Dark.png"><span
+                    class="font-headline-lg font-bold tracking-tighter"><span class="">Infra</span><span
+                        class="text-brand-blue">Clean</span></span></a>
+            <div class="hidden md:flex items-center gap-unit-8">
+                <div class="flex gap-unit-8">
+                    <a class="font-label-caps text-label-caps text-on-surface-variant hover:text-brand-blue transition-colors py-2"
+                        href="index.html">HOME</a>
+                    <a class="font-label-caps text-label-caps text-on-surface-variant hover:text-brand-blue transition-colors py-2"
+                        href="services.html">SERVICES</a>
+                    <!-- <a class="font-label-caps text-label-caps text-on-surface-variant hover:text-brand-blue transition-colors py-2"
+                        href="#technology">TECHNOLOGY</a> -->
+                    <a class="font-label-caps text-label-caps text-on-surface-variant hover:text-brand-blue transition-colors py-2"
+                        href="about.html">ABOUT</a>
+                    <a class="font-label-caps text-label-caps text-on-surface-variant hover:text-brand-blue transition-colors py-2"
+                        href="contact.html">CONTACT</a>
+                </div>
+                <a href="contact.html#contact-form"
+                    class="bg-brand-teal text-white font-label-caps text-label-caps px-6 py-3 rounded hover:brightness-110 transition-all shadow-[0_4px_14px_rgba(0,166,147,0.2)]">
+                    GET A QUOTE
+                </a>
+            </div>
+            <button aria-controls="mobileMenu" aria-expanded="false" class="md:hidden text-on-surface"
+                data-mobile-menu-toggle type="button">
+                <span class="material-symbols-outlined text-3xl" data-mobile-menu-icon>menu</span>
+            </button>
+        </div>
+        <div aria-hidden="true" class="md:hidden mobile-menu border-t border-brand-blue/10 bg-white/95 backdrop-blur-md"
+            id="mobileMenu">
+            <div class="max-w-container-max mx-auto px-margin-mobile py-4 flex flex-col gap-2">
+                <a class="mobile-menu-item font-label-caps text-label-caps text-on-surface-variant hover:text-brand-blue transition-colors py-2"
+                    href="index.html">HOME</a>
+                <a class="mobile-menu-item font-label-caps text-label-caps text-on-surface-variant hover:text-brand-blue transition-colors py-2"
+                    href="services.html">SERVICES</a>
+                <a class="mobile-menu-item font-label-caps text-label-caps text-on-surface-variant hover:text-brand-blue transition-colors py-2"
+                    href="about.html">ABOUT</a>
+                <a class="mobile-menu-item font-label-caps text-label-caps text-on-surface-variant hover:text-brand-blue transition-colors py-2"
+                    href="contact.html">CONTACT</a>
+                <a class="mobile-menu-item mt-2 bg-brand-teal text-white font-label-caps text-label-caps px-6 py-3 rounded hover:brightness-110 transition-all shadow-[0_4px_14px_rgba(0,166,147,0.2)] text-left"
+                    href="contact.html#contact-form">
+                    GET A QUOTE
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-20">
+        <!-- Hero Section -->
+        <section
+            class="relative h-[460px] md:h-[520px] flex items-center justify-center overflow-hidden border-y border-brand-blue/10">
+            <img src="Resources/about-hero-section.png" alt="Modern glass high-rise infrastructure"
+                class="absolute inset-0 w-full h-full object-cover" />
+            <div class="absolute inset-0 bg-gradient-to-r from-brand-dark/70 via-brand-dark/55 to-brand-dark/35"></div>
+            <div class="absolute inset-0 bg-grid-subtle opacity-30"></div>
+            <div class="relative z-10 text-center px-margin-mobile">
+                <div
+                    class="inline-flex items-center gap-2 px-3 py-1 bg-brand-teal/10 text-brand-teal border border-brand-teal/40 rounded-lg mb-6">
+                    <span class="material-symbols-outlined text-[16px]">info</span>
+                    <span class="font-label-caps text-label-caps uppercase tracking-[0.2em]">OUR STORY</span>
+                </div>
+                <h1 class="font-headline-xl text-[40px] md:text-[54px] text-white max-w-3xl mx-auto leading-[1.1]">
+                    New Way To Clean Buildings</h1>
+                <p class="text-body-lg text-white/85 mt-4 max-w-2xl mx-auto">We use the latest drone technology to make
+                    building cleaning safe and easy. Our system removes all the risks and gives you perfect, clean
+                    buildings.
+                </p>
+            </div>
+        </section>
+
+        <!-- Mission Section -->
+        <section class="py-16 md:py-24">
+            <div class="max-w-container-max mx-auto px-margin-mobile md:px-unit-12">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <div
+                            class="inline-flex items-center gap-2 px-3 py-1 bg-brand-blue/10 text-brand-blue border border-brand-blue/40 rounded-lg mb-4">
+                            <span class="font-label-caps text-label-caps uppercase tracking-[0.2em]">OUR MISSION</span>
+                        </div>
+                        <h2 class="font-headline-xl text-[40px] text-on-surface mb-8 leading-[1.1]">Total
+                            Safety.<br />Perfect
+                            Clean.</h2>
+                        <div class="space-y-6">
+                            <div
+                                class="flex gap-4 p-6 bg-white rounded-xl border border-brand-blue/10 shadow-sm card-hover">
+                                <div
+                                    class="w-12 h-12 rounded-lg bg-brand-blue/10 flex items-center justify-center shrink-0">
+                                    <span class="material-symbols-outlined text-brand-blue text-[24px]">security</span>
+                                </div>
+                                <div>
+                                    <h3 class="font-headline-md text-on-surface mb-2">No Danger</h3>
+                                    <p class="text-on-surface-variant text-body-sm">We don't need people climbing high
+                                        up
+                                        or hanging from ropes. Our drones do all the work safely.</p>
+                                </div>
+                            </div>
+                            <div
+                                class="flex gap-4 p-6 bg-white rounded-xl border border-brand-blue/10 shadow-sm card-hover">
+                                <div
+                                    class="w-12 h-12 rounded-lg bg-brand-teal/10 flex items-center justify-center shrink-0">
+                                    <span class="material-symbols-outlined text-brand-teal text-[24px]">science</span>
+                                </div>
+                                <div>
+                                    <h3 class="font-headline-md text-on-surface mb-2">Clean & Pure Water</h3>
+                                    <p class="text-on-surface-variant text-body-sm">We use special filtered water that
+                                        leaves no spots and doesn't hurt the environment.</p>
+                                </div>
+                            </div>
+                            <div
+                                class="flex gap-4 p-6 bg-white rounded-xl border border-brand-blue/10 shadow-sm card-hover">
+                                <div
+                                    class="w-12 h-12 rounded-lg bg-brand-blue/10 flex items-center justify-center shrink-0">
+                                    <span class="material-symbols-outlined text-brand-blue text-[24px]">radar</span>
+                                </div>
+                                <div>
+                                    <h3 class="font-headline-md text-on-surface mb-2">Smart Drones</h3>
+                                    <p class="text-on-surface-variant text-body-sm">Our drones have smart cameras and
+                                        sensors. They clean perfectly every time with no streaks and exact precision.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative group">
+                        <div
+                            class="aspect-square rounded-2xl overflow-hidden shadow-lg border border-brand-blue/10 transition-all duration-500 group-hover:shadow-[0_20px_45px_rgba(45,125,237,0.22)]">
+                            <img class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                                alt="Advanced purification system" src="Resources/our-mission.png" />
+                        </div>
+                        <div
+                            class="absolute -bottom-6 -right-6 bg-brand-teal text-white p-6 rounded-xl max-w-xs shadow-xl border border-brand-teal/20 transition-all duration-500 ease-out group-hover:-translate-y-2 group-hover:translate-x-1 group-hover:shadow-[0_24px_40px_rgba(0,166,147,0.28)]">
+                            <p class="font-body-md italic">"Innovation isn't just about doing it faster—it's about doing
+                                it with absolute certainty."</p>
+                            <p class="font-label-caps mt-4 opacity-80">— Chief Engineering Officer</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fleet Anatomy Section -->
+        <section class="py-16 md:py-24 bg-surface-variant border-y border-brand-blue/10">
+            <div class="max-w-container-max mx-auto px-margin-mobile md:px-unit-12">
+                <div class="text-center mb-16">
+                    <h2 class="font-headline-xl text-[40px] text-on-surface mb-4">Our Drone Technology</h2>
+                    <p class="text-body-lg text-on-surface-variant max-w-2xl mx-auto">Built strong and reliable for all
+                        kinds of tough jobs.</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Tech Item 1 -->
+                    <div
+                        class="md:col-span-2 bg-white rounded-xl p-8 border border-brand-blue/10 shadow-sm relative overflow-hidden group card-hover">
+                        <div class="relative z-10">
+                            <span class="text-brand-blue font-label-caps uppercase tracking-widest mb-2 block">Core
+                                System</span>
+                            <h3 class="font-headline-md text-on-surface mb-4">Smart Flying</h3>
+                            <p class="text-on-surface-variant max-w-md">The drone plans the best path to clean your
+                                building. It can feel the wind and move around obstacles automatically.</p>
+                        </div>
+                        <div
+                            class="absolute right-[-10%] top-[-10%] opacity-10 group-hover:opacity-20 transition-opacity">
+                            <span class="material-symbols-outlined text-[300px]"
+                                style="font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 48;">navigation</span>
+                        </div>
+                    </div>
+                    <!-- Tech Item 2 -->
+                    <div
+                        class="bg-white rounded-xl p-8 border border-brand-blue/10 shadow-sm flex flex-col justify-between card-hover">
+                        <div>
+                            <span
+                                class="material-symbols-outlined text-brand-teal text-[32px] mb-4 block">water_drop</span>
+                            <h3 class="font-headline-md text-on-surface mb-2">Pure Water System</h3>
+                            <p class="text-on-surface-variant text-body-sm">Special filtered water with zero minerals
+                                to leave no spots.</p>
+                        </div>
+                        <div class="mt-6 pt-6 border-t border-brand-blue/10">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-label-caps font-label-caps text-on-surface-variant">WATER
+                                    PURITY</span>
+                                <span class="text-brand-teal font-bold">100%</span>
+                            </div>
+                            <div class="h-1 bg-brand-blue/10 w-full overflow-hidden rounded">
+                                <div class="h-full bg-brand-teal w-full"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Tech Item 3 -->
+                    <div
+                        class="bg-white rounded-xl p-8 border border-brand-blue/10 shadow-sm flex flex-col justify-between card-hover">
+                        <div>
+                            <span
+                                class="material-symbols-outlined text-brand-blue text-[32px] mb-4 block">battery_charging_full</span>
+                            <h3 class="font-headline-md text-on-surface mb-2">Strong Batteries</h3>
+                            <p class="text-on-surface-variant text-body-sm">The drone can work all day and night without
+                                stopping. We have backup power too.</p>
+                        </div>
+                    </div>
+                    <!-- Tech Item 4 -->
+                    <div
+                        class="md:col-span-2 bg-on-surface text-white rounded-xl p-8 shadow-sm overflow-hidden relative">
+                        <div class="grid grid-cols-2 gap-8 relative z-10">
+                            <div>
+                                <h3 class="font-headline-md text-white mb-4">Smart Camera & Sensors</h3>
+                                <p class="text-on-surface-variant mb-6">The drone has advanced cameras and sensors to
+                                    see everything around it and find any problems.</p>
+                                <ul class="space-y-2">
+                                    <li class="flex items-center gap-2 text-label-caps"><span
+                                            class="material-symbols-outlined text-brand-teal text-[18px]">check_circle</span>
+                                        Crystal Clear Video View</li>
+                                    <li class="flex items-center gap-2 text-label-caps"><span
+                                            class="material-symbols-outlined text-brand-teal text-[18px]">check_circle</span>
+                                        Smart Problem Finder</li>
+                                </ul>
+                            </div>
+                            <div class="hidden sm:block opacity-40">
+                                <img class="rounded-lg h-full object-cover" alt="Advanced sensor array"
+                                    src="Resources/ocular-system.png" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Leadership Section -->
+        <section class="py-16 md:py-24">
+            <div class="max-w-container-max mx-auto px-margin-mobile md:px-unit-12">
+                <div class="mb-16">
+                    <div
+                        class="inline-flex items-center gap-2 px-3 py-1 bg-brand-teal/10 text-brand-teal border border-brand-teal/40 rounded-lg mb-4">
+                        <span class="font-label-caps text-label-caps uppercase tracking-[0.2em]">Leadership</span>
+                    </div>
+                    <h2 class="font-headline-xl text-[40px] text-on-surface">The Minds Behind the Business</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Founder 1 -->
+                    <div
+                        class="h-[420px] md:h-[500px] rounded-2xl overflow-hidden shadow-lg border border-brand-blue/10 bg-surface-variant group relative transition-all duration-500 hover:shadow-[0_22px_48px_rgba(17,30,53,0.22)]">
+                        <img alt="Founder"
+                            class="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
+                            src="Resources/founder.png" />
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-on-surface/70 via-transparent to-transparent transition-opacity duration-500 group-hover:opacity-90">
+                        </div>
+                        <div
+                            class="absolute bottom-8 left-8 text-white transition-all duration-500 group-hover:-translate-y-1">
+                            <!-- Founder & CEO -->
+                            <p class="font-headline-md text-[20px]">Founder</p>
+                            <p class="font-body-md">Visionary & Business Strategy</p>
+                        </div>
+                    </div>
+                    <!-- Founder 2 -->
+                    <div
+                        class="h-[420px] md:h-[500px] rounded-2xl overflow-hidden shadow-lg border border-brand-blue/10 bg-surface-variant group relative transition-all duration-500 hover:shadow-[0_22px_48px_rgba(17,30,53,0.22)]">
+                        <img alt="Co-Founder & CTO"
+                            class="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
+                            src="Resources/co-founder.png" />
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-on-surface/70 via-transparent to-transparent transition-opacity duration-500 group-hover:opacity-90">
+                        </div>
+                        <div
+                            class="absolute bottom-8 left-8 text-white transition-all duration-500 group-hover:-translate-y-1">
+                            <!-- Co-Founder & CTO -->
+                            <p class="font-headline-md text-[20px]">Co-Founder</p>
+                            <p class="font-body-md">Innovation & Strategic Direction</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="py-16 pt-0 md:py-24 md:pt-0">
+            <div class="max-w-container-max mx-auto px-margin-mobile md:px-unit-12">
+                <div
+                    class="bg-gradient-to-r from-brand-blue/15 via-brand-teal/15 to-brand-blue/15 rounded-2xl border border-brand-blue/20 p-8 md:p-12 text-center">
+                    <h2 class="font-headline-lg text-[32px] mb-4 text-on-surface">Ready to Transform Your
+                        Infrastructure?</h2>
+                    <p class="text-on-surface-variant max-w-2xl mx-auto mb-8 text-body-lg">Let's discuss how our
+                        aerospace-grade solutions can deliver precision maintenance for your facilities.</p>
+                    <a href="contact.html#contact-form"
+                        class="inline-flex items-center gap-2 bg-brand-teal text-white font-label-caps text-label-caps px-8 py-4 rounded-lg hover:brightness-110 transition-all shadow-[0_4px_14px_rgba(0,166,147,0.3)] font-bold">
+                        REQUEST A CONSULTATION
+                        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop"
+        class="fixed bottom-8 right-8 z-50 w-10 h-10 bg-brand-teal hover:bg-brand-teal/90 text-white rounded-full flex items-center justify-center shadow-lg transition-all duration-300 opacity-0 pointer-events-none hover:scale-110">
+        <span class="material-symbols-outlined">arrow_upward</span>
+    </button>
+
+    <!-- Footer -->
+    <footer class="bg-surface-variant py-unit-12 border-t border-brand-blue/10">
+        <div class="max-w-container-max mx-auto px-margin-mobile md:px-unit-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div class="col-span-1 md:col-span-1">
+                    <a class="flex items-center gap-3 mb-6" href="index.html"><img
+                            src="Resources/InfraClean-Logo-Dark.png" alt="Infra Clean Logo" class="h-12 w-auto"><span
+                            class="font-headline-lg font-bold tracking-tighter"><span>Infra</span><span
+                                class="text-brand-blue">Clean</span></span></a>
+                    <p class="font-body-sm text-on-surface-variant mb-6">Drone cleaning service that's safe, fast,
+                        and keeps buildings clean and new.</p>
+                    <div class="flex items-center gap-3">
+                        <a aria-label="WhatsApp"
+                            class="w-10 h-10 rounded-full border border-brand-blue/20 text-brand-blue hover:text-[#25D366] hover:border-[#25D366]/40 hover:bg-[#25D366]/5 transition-all flex items-center justify-center"
+                            href="https://wa.me/919924660236?text=hello%2C%20I%20need%20to%20inquire%20about%20infrastructure%20cleaning%20via%20drones."
+                            rel="noopener noreferrer" target="_blank"><svg aria-hidden="true" class="w-5 h-5"
+                                fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M19.05 4.94A9.93 9.93 0 0 0 12.01 2C6.49 2 2 6.48 2 12c0 1.76.46 3.47 1.33 4.98L2 22l5.15-1.35A9.97 9.97 0 0 0 12 22c5.52 0 10-4.48 10-10a9.93 9.93 0 0 0-2.95-7.06ZM12 20.19c-1.52 0-3.01-.41-4.31-1.18l-.31-.18-3.06.8.82-2.98-.2-.31A8.15 8.15 0 0 1 3.81 12c0-4.52 3.67-8.19 8.19-8.19a8.1 8.1 0 0 1 5.79 2.4 8.13 8.13 0 0 1 2.4 5.79c0 4.52-3.67 8.19-8.19 8.19Zm4.49-6.14c-.24-.12-1.41-.7-1.63-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1.01-.37-1.93-1.18-.71-.63-1.2-1.42-1.34-1.66-.14-.24-.02-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.29-.74-1.77-.2-.47-.41-.41-.56-.42h-.48c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2 0 1.18.86 2.32.98 2.48.12.16 1.69 2.58 4.09 3.62.57.25 1.01.4 1.36.51.57.18 1.08.15 1.49.09.45-.07 1.41-.58 1.61-1.14.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28Z" />
+                            </svg></a>
+                        <a aria-label="Instagram"
+                            class="w-10 h-10 rounded-full border border-brand-blue/20 text-brand-blue hover:text-[#E4405F] hover:border-[#E4405F]/40 hover:bg-[#E4405F]/5 transition-all flex items-center justify-center"
+                            href="https://www.instagram.com/harrytank4" rel="noopener noreferrer" target="_blank"><svg
+                                aria-hidden="true" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.9"
+                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <rect height="15" rx="4.2" ry="4.2" width="15" x="4.5" y="4.5"></rect>
+                                <circle cx="12" cy="12" r="3.6"></circle>
+                            </svg></a>
+                        <a aria-label="Facebook"
+                            class="w-10 h-10 rounded-full border border-brand-blue/20 text-brand-blue hover:text-[#1877F2] hover:border-[#1877F2]/40 hover:bg-[#1877F2]/5 transition-all flex items-center justify-center"
+                            href="https://www.facebook.com/haresh.prajapati.750" rel="noopener noreferrer"
+                            target="_blank"><svg aria-hidden="true" class="w-5 h-5" fill="currentColor"
+                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M13.5 22v-8h2.7l.4-3h-3.1V9.1c0-.87.25-1.46 1.5-1.46h1.6V5a21.9 21.9 0 0 0-2.3-.12c-2.28 0-3.84 1.39-3.84 3.95V11H8v3h2.56v8h2.94Z" />
+                            </svg></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-label-caps text-on-surface font-bold mb-6">SOLUTIONS</h4>
+                    <ul class="space-y-3 font-body-sm text-on-surface-variant">
+                        <li class=""><a class="hover:text-brand-blue transition-colors"
+                                href="services.html#high-rise">Big Building Cleaning</a></li>
+                        <li class=""><a class="hover:text-brand-blue transition-colors" href="services.html#solar">Solar
+                                Panel Cleaning</a></li>
+                        <li class=""><a class="hover:text-brand-blue transition-colors"
+                                href="services.html#industrial">Factory Cleaning</a></li>
+                        <li class=""><a class="hover:text-brand-blue transition-colors"
+                                href="services.html#temple">Temple Cleaning</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-label-caps text-on-surface font-bold mb-6">COMPANY</h4>
+                    <ul class="space-y-3 font-body-sm text-on-surface-variant">
+                        <li class=""><a class="hover:text-brand-blue transition-colors" href="index.html">Home</a></li>
+                        <li class=""><a class="hover:text-brand-blue transition-colors"
+                                href="services.html">Services</a>
+                        </li>
+                        <li class=""><a class="hover:text-brand-blue transition-colors" href="about.html">About Us</a>
+                        </li>
+                        <li class=""><a class="hover:text-brand-blue transition-colors" href="contact.html">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-label-caps text-on-surface font-bold mb-6">CONTACT</h4>
+                    <ul class="space-y-4 font-body-sm text-on-surface-variant">
+                        <li class="flex items-start gap-3"><span
+                                class="material-symbols-outlined text-brand-blue pt-1 text-[18px]">location_on</span><a
+                                class="hover:text-brand-blue transition-colors"
+                                href="https://maps.app.goo.gl/Q3xZvbLkcFw96oz18" rel="noopener noreferrer"
+                                target="_blank">Ahmedabad, Gujarat, India</a></li>
+                        <li class="flex items-center gap-3"><span
+                                class="material-symbols-outlined text-brand-blue text-[18px]">mail</span><a
+                                class="hover:text-brand-blue transition-colors"
+                                href="mailto:ops@infraclean-systems.com">ops@infraclean-systems.com</a></li>
+                        <li class="flex items-center gap-3"><span
+                                class="material-symbols-outlined text-brand-blue text-[18px]">phone</span><a
+                                class="hover:text-brand-blue transition-colors" href="tel:+919924660236">+91 99246
+                                60236</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div
+                class="border-t border-brand-blue/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="font-label-caps text-[10px] text-on-surface-variant">© 2024 INFRACLEAN SYSTEMS. ALL RIGHTS
+                    RESERVED.</p>
+                <div class="flex gap-6 font-label-caps text-[10px] text-on-surface-variant"><button
+                        class="hover:text-on-surface transition-colors" data-modal-open="privacyModal"
+                        type="button">PRIVACY PROTOCOL</button><button class="hover:text-on-surface transition-colors"
+                        data-modal-open="termsModal" type="button">SERVICE TERMS</button></div>
+            </div>
+        </div>
+    </footer>
+
+    <div aria-hidden="true"
+        class="policy-modal fixed inset-0 z-[70] hidden items-center justify-center bg-brand-dark/70 backdrop-blur-sm px-4"
+        id="privacyModal" role="dialog" aria-modal="true" aria-labelledby="privacy-modal-title">
+        <div class="policy-modal-panel w-full max-w-3xl rounded-xl border border-brand-blue/20 bg-white shadow-2xl">
+            <div class="flex items-center justify-between border-b border-brand-blue/10 px-6 py-4">
+                <h3 class="font-headline-md text-[22px] text-on-surface" id="privacy-modal-title">Privacy Protocol</h3>
+                <button aria-label="Close privacy modal"
+                    class="text-on-surface-variant hover:text-brand-blue transition-colors" data-modal-close
+                    type="button"><span class="material-symbols-outlined">close</span></button>
+            </div>
+            <div class="tc-scroll px-6 py-5 space-y-4 text-on-surface-variant font-body-sm leading-relaxed">
+                <p>InfraClean collects only the information required to respond to inquiries, prepare quotes, and
+                    deliver
+                    services. This may include your name, phone number, email address, and site details you share
+                    through forms, calls, or messages.</p>
+                <p>We use your information to communicate with you, schedule assessments, and improve service quality.
+                    We do not sell your personal data to third parties.</p>
+                <p>Operational media such as site photos or inspection visuals are used for internal analysis and
+                    reporting. Any public use is done only with prior approval.</p>
+                <p>For privacy requests, updates, or deletion of your submitted data, contact us directly at
+                    ops@infraclean-systems.com.</p>
+                <p>When you interact with our website, limited technical information such as browser type, device
+                    characteristics, and approximate geolocation may be collected for analytics, reliability, and
+                    security monitoring.</p>
+                <p>We retain inquiry and project records only for as long as required for customer support, legal
+                    compliance, billing validation, and service quality audits. Retention periods are reviewed
+                    periodically.</p>
+                <p>Access to customer information is restricted to authorized team members and service providers who
+                    need it to perform operational responsibilities, and who are bound by confidentiality obligations.
+                </p>
+                <p>We apply reasonable administrative and technical safeguards to protect submitted information from
+                    unauthorized access, misuse, alteration, or disclosure.</p>
+                <p>If you believe any information we hold is inaccurate, incomplete, or outdated, you may request
+                    correction and we will make commercially reasonable efforts to update records promptly.</p>
+                <p>By using our contact channels and requesting our services, you acknowledge this privacy protocol and
+                    consent to data processing strictly for the purposes described above.</p>
+            </div>
+            <div class="border-t border-brand-blue/10 px-6 py-4 flex justify-end"><button
+                    class="bg-brand-blue text-white font-label-caps text-label-caps px-5 py-2 rounded hover:brightness-110 transition-all"
+                    data-modal-close type="button">DISMISS</button></div>
+        </div>
+    </div>
+
+    <div aria-hidden="true"
+        class="policy-modal fixed inset-0 z-[70] hidden items-center justify-center bg-brand-dark/70 backdrop-blur-sm px-4"
+        id="termsModal" role="dialog" aria-modal="true" aria-labelledby="terms-modal-title">
+        <div class="policy-modal-panel w-full max-w-3xl rounded-xl border border-brand-blue/20 bg-white shadow-2xl">
+            <div class="flex items-center justify-between border-b border-brand-blue/10 px-6 py-4">
+                <h3 class="font-headline-md text-[22px] text-on-surface" id="terms-modal-title">Service Terms</h3>
+                <button aria-label="Close service terms modal"
+                    class="text-on-surface-variant hover:text-brand-blue transition-colors" data-modal-close
+                    type="button"><span class="material-symbols-outlined">close</span></button>
+            </div>
+            <div class="tc-scroll px-6 py-5 space-y-4 text-on-surface-variant font-body-sm leading-relaxed">
+                <p>All quotes are based on visible site conditions and project scope shared at the time of assessment.
+                    Final pricing may be adjusted if on-site conditions differ materially from initial inputs.</p>
+                <p>Clients are responsible for providing clear access permissions and required operational approvals for
+                    service windows, including any building-level or facility-level coordination.</p>
+                <p>Work timelines are estimates and may shift due to weather, safety constraints, or force majeure
+                    conditions. InfraClean prioritizes operational safety over schedule acceleration.</p>
+                <p>Any concerns regarding completed work should be reported within 7 days of service delivery so our
+                    team can review and respond promptly.</p>
+                <p>Service execution is subject to safe wind conditions, visibility thresholds, and operational
+                    readiness checks performed by our flight and safety team before each deployment window.</p>
+                <p>Where required, clients must disclose sensitive facade materials, electrical exposure points,
+                    restricted flight zones, and known structural limitations prior to scheduling.</p>
+                <p>Unless explicitly stated in writing, quotation values do not include third-party permit fees, special
+                    access machinery, or extraordinary post-clean restoration beyond standard scope.</p>
+                <p>Payment milestones, invoice timelines, and applicable taxes are governed by the accepted quotation
+                    and purchase confirmation issued for each project.</p>
+                <p>Any service delay resulting from denied access, unsafe conditions, client-side scheduling changes, or
+                    incomplete prerequisites may require rescheduling and revised timelines.</p>
+                <p>InfraClean reserves the right to suspend or terminate operations when safety risks are identified,
+                    without liability for delays necessary to protect personnel, property, or surrounding public areas.
+                </p>
+            </div>
+            <div class="border-t border-brand-blue/10 px-6 py-4 flex justify-end"><button
+                    class="bg-brand-blue text-white font-label-caps text-label-caps px-5 py-2 rounded hover:brightness-110 transition-all"
+                    data-modal-close type="button">DISMISS</button></div>
+        </div>
+    </div>
+
+    <script src="common.js"></script>
+
+</body>
+
+</html>
