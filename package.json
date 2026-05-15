@@ -1,0 +1,7 @@
+{
+    "type": "module",
+    "name": "infraclean",
+    "version": "1.0.0",
+    "description": "InfraClean - Professional Infrastructure Cleaning Services",
+    "private": true
+}
