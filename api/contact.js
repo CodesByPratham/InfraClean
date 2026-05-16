@@ -95,13 +95,61 @@ async function sendViaResend(payload) {
     ].join('\n');
 
     const html = `
-        <h2>New InfraClean enquiry</h2>
-        <p><strong>Name:</strong> ${payload.fullName}</p>
-        <p><strong>Email:</strong> ${payload.email}</p>
-        <p><strong>Company:</strong> ${payload.company || 'N/A'}</p>
-        <p><strong>Service:</strong> ${payload.service}</p>
-        <p><strong>Message:</strong></p>
-        <p>${payload.message.replace(/\n/g, '<br>')}</p>
+        <!DOCTYPE html>
+        <html lang="en" style="background: #f6f8fa; margin: 0; padding: 0;">
+        <head>
+            <meta charset="UTF-8" />
+            <title>New InfraClean Enquiry</title>
+            <meta name="color-scheme" content="light only">
+        </head>
+        <body style="background: #f6f8fa; margin: 0; padding: 0; font-family: 'Segoe UI', Arial, sans-serif;">
+            <table width="100%" cellpadding="0" cellspacing="0" style="background: #f6f8fa; padding: 32px 0;">
+            <tr>
+                <td align="center">
+                <table width="480" cellpadding="0" cellspacing="0" style="background: #fff; border-radius: 18px; box-shadow: 0 4px 32px rgba(45,125,237,0.08); padding: 32px 32px 24px 32px;">
+                    <tr>
+                    <td align="center" style="padding-bottom: 24px;">
+                        <img src="https://infra-clean.vercel.app/Resources/infraclean-app-icon-dark.png" alt="InfraClean Logo" width="120" style="display: block; margin: 0 auto 8px auto;" />
+                    </td>
+                    </tr>
+                    <tr>
+                    <td>
+                        <h2 style="color: #2D7DED; font-size: 1.5rem; margin: 0 0 16px 0; font-weight: 700; letter-spacing: 0.5px;">New InfraClean Enquiry</h2>
+                        <table width="100%" cellpadding="0" cellspacing="0" style="font-size: 1rem; color: #111E35;">
+                        <tr>
+                            <td style="padding: 8px 0;"><strong>Name:</strong></td>
+                            <td style="padding: 8px 0;">${payload.fullName}</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px 0;"><strong>Email:</strong></td>
+                            <td style="padding: 8px 0;">${payload.email}</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px 0;"><strong>Company:</strong></td>
+                            <td style="padding: 8px 0;">${payload.company || 'N/A'}</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px 0;"><strong>Service:</strong></td>
+                            <td style="padding: 8px 0;">${payload.service}</td>
+                        </tr>
+                        </table>
+                        <div style="margin: 24px 0 0 0; padding: 18px; background: #f3f7fd; border-radius: 12px; color: #2D7DED;">
+                        <strong>Message:</strong>
+                        <div style="color: #111E35; margin-top: 8px;">${payload.message}</div>
+                        </div>
+                    </td>
+                    </tr>
+                    <tr>
+                    <td align="center" style="padding-top: 32px; color: #888; font-size: 0.95rem;">
+                        &copy; 2026 InfraClean. All rights reserved.
+                    </td>
+                    </tr>
+                </table>
+                </td>
+            </tr>
+            </table>
+        </body>
+        </html>
     `;
 
     const response = await fetch('https://api.resend.com/emails', {
