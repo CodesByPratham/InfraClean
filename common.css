@@ -46,7 +46,7 @@ html.custom-cursor-enabled [contenteditable='true'] {
     border: 1px solid rgba(0, 166, 147, 0.4);
     background: radial-gradient(circle at center, rgba(45, 125, 237, 0.14) 0%, rgba(0, 166, 147, 0.08) 45%, rgba(255, 255, 255, 0.02) 72%, transparent 100%);
     box-shadow: 0 0 0 1px rgba(45, 125, 237, 0.08) inset, 0 0 24px rgba(0, 166, 147, 0.22), 0 0 48px rgba(45, 125, 237, 0.12);
-    backdrop-filter: blur(2px);
+    backdrop-filter: blur(1px);
 }
 
 .site-cursor-dot {
