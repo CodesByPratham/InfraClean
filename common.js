@@ -221,6 +221,69 @@ document.addEventListener('DOMContentLoaded', () => {
         const serviceLabel = contactForm.querySelector('#serviceDropdownSelected');
         const serviceInput = contactForm.querySelector('#serviceDropdownInput');
 
+        const playSubmitConfetti = (anchor) => {
+            if (!anchor) {
+                return;
+            }
+
+            const anchorRect = anchor.getBoundingClientRect();
+            const container = document.createElement('div');
+            container.setAttribute('aria-hidden', 'true');
+            container.style.position = 'fixed';
+            container.style.left = `${anchorRect.left}px`;
+            container.style.top = `${anchorRect.top}px`;
+            container.style.width = `${anchorRect.width}px`;
+            container.style.height = `${anchorRect.height}px`;
+            container.style.pointerEvents = 'none';
+            container.style.overflow = 'visible';
+            container.style.zIndex = '80';
+
+            document.body.appendChild(container);
+
+            const colors = ['#2D7DED', '#00A693', '#F59E0B', '#F97316', '#FFFFFF'];
+            const totalPieces = 20;
+
+            for (let index = 0; index < totalPieces; index += 1) {
+                const piece = document.createElement('span');
+                const size = 8 + Math.random() * 8;
+                const angle = (Math.PI * 2 * index) / totalPieces;
+                const distance = 70 + Math.random() * 70;
+                const driftX = Math.cos(angle) * distance;
+                const driftY = Math.sin(angle) * distance - (25 + Math.random() * 20);
+                const spin = 220 + Math.random() * 260;
+
+                piece.style.position = 'absolute';
+                piece.style.left = '50%';
+                piece.style.top = '50%';
+                piece.style.width = `${size}px`;
+                piece.style.height = `${size * (0.6 + Math.random() * 0.6)}px`;
+                piece.style.borderRadius = Math.random() > 0.5 ? '9999px' : '2px';
+                piece.style.background = colors[index % colors.length];
+                piece.style.willChange = 'transform, opacity';
+                piece.style.transform = 'translate(-50%, -50%)';
+                piece.style.boxShadow = '0 0 0 1px rgba(255,255,255,0.15)';
+
+                container.appendChild(piece);
+
+                piece.animate(
+                    [
+                        { transform: 'translate(-50%, -50%) scale(1) rotate(0deg)', opacity: 1 },
+                        { transform: `translate(-50%, -50%) translate(${driftX}px, ${driftY}px) rotate(${spin}deg) scale(0.35)`, opacity: 0 }
+                    ],
+                    {
+                        duration: 900 + Math.random() * 220,
+                        delay: Math.random() * 80,
+                        easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
+                        fill: 'forwards'
+                    }
+                );
+            }
+
+            window.setTimeout(() => {
+                container.remove();
+            }, 1300);
+        };
+
         const setFormStatus = (message, isError) => {
             if (!statusElement) {
                 return;
@@ -297,6 +360,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     serviceInput.value = '';
                 }
 
+                playSubmitConfetti(submitButton);
                 setFormStatus('Thanks. Your enquiry has been sent successfully.', false);
             } catch (error) {
                 setFormStatus(error.message || 'Something went wrong while sending your enquiry.', true);
