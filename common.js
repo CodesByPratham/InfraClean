@@ -1,4 +1,89 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const motionReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const finePointer = window.matchMedia('(pointer: fine)').matches;
+
+    if (finePointer && !motionReduced) {
+        document.documentElement.classList.add('custom-cursor-enabled');
+
+        const cursor = document.createElement('div');
+        cursor.className = 'site-cursor';
+        cursor.setAttribute('aria-hidden', 'true');
+
+        const cursorDot = document.createElement('div');
+        cursorDot.className = 'site-cursor-dot';
+        cursorDot.setAttribute('aria-hidden', 'true');
+
+        document.body.appendChild(cursor);
+        document.body.appendChild(cursorDot);
+
+        let targetX = window.innerWidth / 2;
+        let targetY = window.innerHeight / 2;
+        let currentX = targetX;
+        let currentY = targetY;
+        let isCursorVisible = false;
+        let rafId = null;
+
+        const animateCursor = () => {
+            currentX += (targetX - currentX) * 0.18;
+            currentY += (targetY - currentY) * 0.18;
+
+            cursor.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) translate(-50%, -50%)`;
+            cursorDot.style.transform = `translate3d(${targetX}px, ${targetY}px, 0) translate(-50%, -50%)`;
+
+            rafId = window.requestAnimationFrame(animateCursor);
+        };
+
+        const setCursorState = (stateName, isActive) => {
+            cursor.classList.toggle(stateName, isActive);
+            cursorDot.classList.toggle(stateName, isActive);
+        };
+
+        window.addEventListener('pointermove', (event) => {
+            targetX = event.clientX;
+            targetY = event.clientY;
+
+            if (!isCursorVisible) {
+                cursor.classList.add('is-visible');
+                cursorDot.classList.add('is-visible');
+                isCursorVisible = true;
+            }
+        }, { passive: true });
+
+        window.addEventListener('pointerdown', () => {
+            setCursorState('is-pressed', true);
+        });
+
+        window.addEventListener('pointerup', () => {
+            setCursorState('is-pressed', false);
+        });
+
+        window.addEventListener('mouseleave', () => {
+            cursor.classList.remove('is-visible');
+            cursorDot.classList.remove('is-visible');
+            isCursorVisible = false;
+        });
+
+        window.addEventListener('mouseenter', () => {
+            if (isCursorVisible) {
+                cursor.classList.add('is-visible');
+                cursorDot.classList.add('is-visible');
+            }
+        });
+
+        document.addEventListener('mouseover', (event) => {
+            const interactive = event.target.closest('a, button, [role="button"], summary, label, input, textarea, select, [data-modal-open], [data-modal-close], [data-contact-submit], [data-mobile-menu-toggle]');
+            setCursorState('is-hovering', Boolean(interactive));
+        });
+
+        animateCursor();
+
+        window.addEventListener('beforeunload', () => {
+            if (rafId) {
+                window.cancelAnimationFrame(rafId);
+            }
+        });
+    }
+
     const mobileMenuToggle = document.querySelector('[data-mobile-menu-toggle]');
     const mobileMenu = document.getElementById('mobileMenu');
     const mobileMenuIcon = document.querySelector('[data-mobile-menu-icon]');
@@ -221,67 +306,62 @@ document.addEventListener('DOMContentLoaded', () => {
         const serviceLabel = contactForm.querySelector('#serviceDropdownSelected');
         const serviceInput = contactForm.querySelector('#serviceDropdownInput');
 
-        const playSubmitConfetti = (anchor) => {
+        const playSubmitConfetti = async (anchor) => {
             if (!anchor) {
                 return;
             }
 
             const anchorRect = anchor.getBoundingClientRect();
+            const animationSize = Math.min(280, Math.max(180, Math.round(Math.min(anchorRect.width, 240))));
             const container = document.createElement('div');
             container.setAttribute('aria-hidden', 'true');
             container.style.position = 'fixed';
-            container.style.left = `${anchorRect.left}px`;
-            container.style.top = `${anchorRect.top}px`;
-            container.style.width = `${anchorRect.width}px`;
-            container.style.height = `${anchorRect.height}px`;
+            container.style.left = `${anchorRect.left + (anchorRect.width / 2) - (animationSize / 2)}px`;
+            container.style.top = `${anchorRect.top + (anchorRect.height / 2) - (animationSize / 2)}px`;
+            container.style.width = `${animationSize}px`;
+            container.style.height = `${animationSize}px`;
             container.style.pointerEvents = 'none';
             container.style.overflow = 'visible';
             container.style.zIndex = '80';
 
             document.body.appendChild(container);
 
-            const colors = ['#2D7DED', '#00A693', '#F59E0B', '#F97316', '#FFFFFF'];
-            const totalPieces = 20;
+            try {
+                const response = await fetch('Resources/confetti.json', { cache: 'no-store' });
+                if (!response.ok) {
+                    throw new Error('Unable to load confetti animation.');
+                }
 
-            for (let index = 0; index < totalPieces; index += 1) {
-                const piece = document.createElement('span');
-                const size = 8 + Math.random() * 8;
-                const angle = (Math.PI * 2 * index) / totalPieces;
-                const distance = 70 + Math.random() * 70;
-                const driftX = Math.cos(angle) * distance;
-                const driftY = Math.sin(angle) * distance - (25 + Math.random() * 20);
-                const spin = 220 + Math.random() * 260;
+                const animationData = await response.json();
+                if (!window.lottie || typeof window.lottie.loadAnimation !== 'function') {
+                    throw new Error('Lottie is unavailable.');
+                }
 
-                piece.style.position = 'absolute';
-                piece.style.left = '50%';
-                piece.style.top = '50%';
-                piece.style.width = `${size}px`;
-                piece.style.height = `${size * (0.6 + Math.random() * 0.6)}px`;
-                piece.style.borderRadius = Math.random() > 0.5 ? '9999px' : '2px';
-                piece.style.background = colors[index % colors.length];
-                piece.style.willChange = 'transform, opacity';
-                piece.style.transform = 'translate(-50%, -50%)';
-                piece.style.boxShadow = '0 0 0 1px rgba(255,255,255,0.15)';
-
-                container.appendChild(piece);
-
-                piece.animate(
-                    [
-                        { transform: 'translate(-50%, -50%) scale(1) rotate(0deg)', opacity: 1 },
-                        { transform: `translate(-50%, -50%) translate(${driftX}px, ${driftY}px) rotate(${spin}deg) scale(0.35)`, opacity: 0 }
-                    ],
-                    {
-                        duration: 900 + Math.random() * 220,
-                        delay: Math.random() * 80,
-                        easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
-                        fill: 'forwards'
+                const animation = window.lottie.loadAnimation({
+                    container,
+                    renderer: 'svg',
+                    loop: false,
+                    autoplay: true,
+                    animationData,
+                    rendererSettings: {
+                        preserveAspectRatio: 'xMidYMid slice'
                     }
-                );
-            }
+                });
 
-            window.setTimeout(() => {
+                animation.addEventListener('complete', () => {
+                    animation.destroy();
+                    container.remove();
+                });
+
+                window.setTimeout(() => {
+                    if (container.isConnected) {
+                        animation.destroy();
+                        container.remove();
+                    }
+                }, 2400);
+            } catch (error) {
                 container.remove();
-            }, 1300);
+            }
         };
 
         const setFormStatus = (message, isError) => {
@@ -360,7 +440,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     serviceInput.value = '';
                 }
 
-                playSubmitConfetti(submitButton);
+                void playSubmitConfetti(submitButton);
                 setFormStatus('Thanks. Your enquiry has been sent successfully.', false);
             } catch (error) {
                 setFormStatus(error.message || 'Something went wrong while sending your enquiry.', true);

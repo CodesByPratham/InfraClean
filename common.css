@@ -2,6 +2,86 @@
     font-variation-settings: 'FILL' 1;
 }
 
+html.custom-cursor-enabled,
+html.custom-cursor-enabled body,
+html.custom-cursor-enabled a,
+html.custom-cursor-enabled button,
+html.custom-cursor-enabled [role='button'],
+html.custom-cursor-enabled summary,
+html.custom-cursor-enabled label,
+html.custom-cursor-enabled [data-mobile-menu-toggle],
+html.custom-cursor-enabled [data-modal-open],
+html.custom-cursor-enabled [data-modal-close],
+html.custom-cursor-enabled [data-contact-submit],
+html.custom-cursor-enabled [data-contact-form] input,
+html.custom-cursor-enabled [data-contact-form] textarea,
+html.custom-cursor-enabled [data-contact-form] select {
+    cursor: none !important;
+}
+
+html.custom-cursor-enabled input,
+html.custom-cursor-enabled textarea,
+html.custom-cursor-enabled select,
+html.custom-cursor-enabled [contenteditable='true'] {
+    cursor: text !important;
+}
+
+.site-cursor,
+.site-cursor-dot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0;
+    transform: translate3d(-50%, -50%, 0);
+    transition: opacity 160ms ease, transform 160ms ease, width 160ms ease, height 160ms ease, border-color 160ms ease, background-color 160ms ease, box-shadow 160ms ease;
+    will-change: transform, opacity;
+}
+
+.site-cursor {
+    width: 42px;
+    height: 42px;
+    border-radius: 9999px;
+    border: 1px solid rgba(0, 166, 147, 0.4);
+    background: radial-gradient(circle at center, rgba(45, 125, 237, 0.14) 0%, rgba(0, 166, 147, 0.08) 45%, rgba(255, 255, 255, 0.02) 72%, transparent 100%);
+    box-shadow: 0 0 0 1px rgba(45, 125, 237, 0.08) inset, 0 0 24px rgba(0, 166, 147, 0.22), 0 0 48px rgba(45, 125, 237, 0.12);
+    backdrop-filter: blur(2px);
+}
+
+.site-cursor-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 9999px;
+    background: linear-gradient(135deg, #2D7DED 0%, #00A693 100%);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.45), 0 0 18px rgba(0, 166, 147, 0.35);
+}
+
+.site-cursor.is-visible,
+.site-cursor-dot.is-visible {
+    opacity: 1;
+}
+
+.site-cursor.is-hovering {
+    width: 58px;
+    height: 58px;
+    border-color: rgba(45, 125, 237, 0.65);
+    background: radial-gradient(circle at center, rgba(45, 125, 237, 0.2) 0%, rgba(0, 166, 147, 0.12) 50%, transparent 100%);
+    box-shadow: 0 0 0 1px rgba(45, 125, 237, 0.14) inset, 0 0 32px rgba(0, 166, 147, 0.28), 0 0 68px rgba(45, 125, 237, 0.15);
+}
+
+.site-cursor-dot.is-hovering {
+    transform: translate3d(-50%, -50%, 0) scale(0.7);
+}
+
+.site-cursor.is-pressed {
+    transform: translate3d(-50%, -50%, 0) scale(0.88);
+}
+
+.site-cursor-dot.is-pressed {
+    transform: translate3d(-50%, -50%, 0) scale(0.55);
+}
+
 .gradient-mesh {
     background: linear-gradient(135deg, rgba(45, 125, 237, 0.1) 0%, rgba(0, 196, 167, 0.1) 100%);
 }
@@ -102,8 +182,35 @@
 
     .mobile-menu,
     .mobile-menu-item,
-    .policy-modal .policy-modal-panel {
+    .policy-modal .policy-modal-panel,
+    .site-cursor,
+    .site-cursor-dot {
         transition: none;
+    }
+}
+
+@media (pointer: coarse) {
+
+    html.custom-cursor-enabled,
+    html.custom-cursor-enabled body,
+    html.custom-cursor-enabled a,
+    html.custom-cursor-enabled button,
+    html.custom-cursor-enabled [role='button'],
+    html.custom-cursor-enabled summary,
+    html.custom-cursor-enabled label,
+    html.custom-cursor-enabled [data-mobile-menu-toggle],
+    html.custom-cursor-enabled [data-modal-open],
+    html.custom-cursor-enabled [data-modal-close],
+    html.custom-cursor-enabled [data-contact-submit],
+    html.custom-cursor-enabled [data-contact-form] input,
+    html.custom-cursor-enabled [data-contact-form] textarea,
+    html.custom-cursor-enabled [data-contact-form] select {
+        cursor: auto !important;
+    }
+
+    .site-cursor,
+    .site-cursor-dot {
+        display: none !important;
     }
 }
 
